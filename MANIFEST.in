@@ -1,0 +1,3 @@
+include config.json
+include LICENSE
+include run.py

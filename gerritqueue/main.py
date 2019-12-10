@@ -9,6 +9,7 @@ import sys
 
 from .gerrit import Gerrit, GerritException
 from .rqueue import Rqueue, RqueueException
+from .version import VERSION
 
 
 def _queue(changes, queue):
@@ -62,6 +63,9 @@ def main():
     parser.add_argument('-q', '--gerrit-query', dest='gerrit_query',
                         help='gerrit query, format: QUERY1,QUERY2,...',
                         required=True)
+    parser.add_argument('-v', '--version',
+                        action='version',
+                        version=VERSION)
 
     options = parser.parse_args()
 
