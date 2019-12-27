@@ -24,7 +24,7 @@ class Gerrit(object):
         self._debug = config.get('debug', False)
         self._pass = config.get('pass', None)
         self._query = config.get('query', {'option': ['CURRENT_REVISION']})
-        self._url = 'http://' + config.get('host', 'localhost') + ':' + str(config.get('port', 80))
+        self._url = 'http://' + config.get('host', 'localhost') + ':' + str(config.get('port', 80)) + '/a'
         self._user = config.get('user', None)
 
     def get(self, _id):
