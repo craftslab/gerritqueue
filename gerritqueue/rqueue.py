@@ -24,7 +24,7 @@ class Rqueue(object):
 
         self._db = config.get('db', 0)
         self._debug = config.get('debug', False)
-        self._hash = config.get('hash', {'expire': {'days': 1}, 'key': 'current_revision', 'name': '_number'})
+        self._hash = config.get('hash', {'expire': {'days': 1}, 'name': '_number', 'value': 'current_revision'})
         self._host = config.get('host', 'localhost')
         self._pass = config.get('pass', None)
         self._port = config.get('port', 6379)
