@@ -10,8 +10,8 @@
 ## Requirements
 
 - Python (3.7+)
-- pip
-- redis
+- Pip
+- Redis
 
 
 
