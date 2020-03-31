@@ -35,16 +35,32 @@ class Gerrit(object):
         return json.loads(response.text.replace(")]}'", ''))
 
     def query(self, search):
-        payload = {
-            'o': self._query['option'],
-            'q': search
-        }
+        def _helper(search, start):
+            payload = {
+                'o': self._query['option'],
+                'q': search,
+                'start': start
+            }
 
-        response = requests.get(url=self._url+'/changes/', auth=(self._user, self._pass), params=payload)
-        if response.status_code != requests.codes.ok:
-            return None
+            response = requests.get(url=self._url+'/changes/', auth=(self._user, self._pass), params=payload)
+            if response.status_code != requests.codes.ok:
+                return None
 
-        return json.loads(response.text.replace(")]}'", ''))
+            return json.loads(response.text.replace(")]}'", ''))
+
+        def _query(search, start):
+            buf = _helper(search, start)
+            if len(buf) == 0:
+                return []
+
+            if buf[-1].get(u'_more_changes', False) is False:
+                return buf
+
+            buf.extend(_query(search, start + len(buf)))
+
+            return buf
+
+        return _query(search, 0)
 
 
 if __name__ == '__main__':
